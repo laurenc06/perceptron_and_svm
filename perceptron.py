@@ -6,6 +6,7 @@ Homework 2, Problem 1: Voted Perceptron
 
 import numpy as np
 import pandas as pd
+# import matplotlib.pyplot as plt
 
 
 def load_data(X_path: str, y_path: str = None):
@@ -139,7 +140,7 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
     # print("X_test", X_test.shape)
 
     # Train
-    model = VotedPerceptron(epochs=1)  # TODO: tune epochs yourself
+    model = VotedPerceptron(epochs=3)  # tune epochs
     model.train(X_train_p, y_train)
 
     # Predict
@@ -148,5 +149,47 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
     # Save one integer per line, no header according to assignment instructions
     np.savetxt(pred_file, y_pred, fmt="%d")
 
+# # This is a block of code for my testing and for generating my grpahs for the report
 # if __name__ == "__main__":
-#     run("spam_X.csv", "spam_y.csv", "spam_X.csv", "preds.txt")
+#     X, y = load_data("spam_X.csv", "spam_y.csv")
+
+#     n = len(X)
+#     split_90 = int(0.9 * n)
+
+#     X_train_full = X[:split_90]
+#     y_train_full = y[:split_90]
+
+#     X_test = X[split_90:]
+#     y_test = y[split_90:]
+
+#     # Preprocess AFTER split
+#     X_train_p, X_test_p = preprocess_data(X_train_full, X_test)
+
+#     # run experiment on different fractions of training data
+#     # fractions = [0.01, 0.02, 0.05, 0.10, 0.20, 1.0]
+#     epochs = [1, 2, 3, 5]
+#     results = []
+
+#     for e in epochs:
+#         # size = int(frac*len(X_train_p))
+
+#         # X_subset = X_train_p[:size]
+#         # y_subset = y_train_full[:size]
+
+#         model = VotedPerceptron(epochs=e)
+#         # model.train(X_subset, y_subset)
+#         model.train(X_train_p, y_train_full)
+
+#         preds = model.predict(X_test_p)
+#         acc = evaluate(y_test, preds)
+
+#         results.append(acc)
+#         print(e, acc)
+
+#     # plt.plot([f*100 for f in fractions], results, marker='o')
+
+#     # plt.xlabel("Percent of Remaining Training Data Used")
+#     # plt.ylabel("Accuracy")
+#     # plt.title("Voted Perceptron Accuracy vs Training Size")
+#     # plt.grid(True)
+#     # plt.savefig("perceptron_plot.png")

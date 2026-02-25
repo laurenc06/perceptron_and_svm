@@ -6,6 +6,7 @@ Homework 2, Problem 2: Support Vector Machine (SVM)
 
 import numpy as np
 import pandas as pd
+# import matplotlib.pyplot as plt
 
 
 def load_data(X_path: str, y_path: str = None):
@@ -52,8 +53,8 @@ def preprocess_data(X_train, X_test):
 
 class SVMClassifier:
     """Support Vector Machine Classifier."""
-    # initialize  stuff
-    def __init__(self, epochs=1, learning_rate = 0.01, lambda_ = 0.01):
+    # initialize stuff
+    def __init__(self, epochs=1, learning_rate = 0.001, lambda_ = 0.005):
         self.epochs = epochs
         # note: learning rate is how big of a step we take when updating weights
         # lambda is how much we punish large weights
@@ -121,7 +122,7 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
     X_train_p, X_test_p = preprocess_data(X_train, X_test)
 
     # Train
-    model = SVMClassifier(epochs=1)  # TODO: tune epochs yourself
+    model = SVMClassifier(epochs=2)  #tune epochs
     model.train(X_train_p, y_train)
 
     # Predict
@@ -131,6 +132,45 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
     np.savetxt(pred_file, y_pred, fmt="%d")
 
 
+# # this block is for testing and for generating my plots
 # if __name__ == "__main__":
-#     run("spam_X.csv", "spam_y.csv", "spam_X.csv", "svm_preds.txt")
-#     print("Wrote svm_preds.txt")
+#     X, y = load_data("spam_X.csv", "spam_y.csv")
+
+#     n = len(X)
+#     split_90 = int(0.9*n)
+
+#     X_train_full = X[:split_90]
+#     y_train_full = y[:split_90]
+
+#     X_test = X[split_90:]
+#     y_test = y[split_90:]
+
+#     # Preprocess AFTER split
+#     X_train_p, X_test_p = preprocess_data(X_train_full, X_test)
+
+#     # run experiment on different lambdas
+#     # lambdas = [0.0001, 0.001, 0.01, 0.1, 1, 10]
+#     # epochs = [1, 2, 3, 5]
+#     learning_rate = [0.0001, 0.001, 0.01, 0.1, 1, 10]
+#     results = []
+
+#     for l in learning_rate:
+#         model = SVMClassifier(epochs=2, learning_rate=l, lambda_=0.005)
+#         model.train(X_train_p, y_train_full)
+
+#         preds = model.predict(X_test_p)
+#         acc = evaluate(y_test, preds)
+
+#         results.append(acc)
+#         print(l, acc)
+
+# #     plt.plot(lambdas, results, marker='o')
+# #     plt.xscale("log") # we use log scale according to report instructions
+
+
+# #     plt.xlabel("Lambda Used (log scale)")
+# #     plt.ylabel("Accuracy")
+# #     plt.title("SVM Accuracy vs Lambda")
+# #     plt.grid(True)
+# #     plt.savefig("svm_plot.png")
+

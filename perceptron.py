@@ -140,7 +140,7 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
     # print("X_test", X_test.shape)
 
     # Train
-    model = VotedPerceptron(epochs=2)  # tune epochs
+    model = VotedPerceptron(epochs=3)  # tune epochs
     model.train(X_train_p, y_train)
 
     # Predict

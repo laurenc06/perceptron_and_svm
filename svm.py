@@ -54,7 +54,7 @@ def preprocess_data(X_train, X_test):
 class SVMClassifier:
     """Support Vector Machine Classifier."""
     # initialize stuff
-    def __init__(self, epochs=1, learning_rate = 0.001, lambda_ = 0.007):
+    def __init__(self, epochs=1, learning_rate = 0.003, lambda_ = 0.007):
         self.epochs = epochs
         # note: learning rate is how big of a step we take when updating weights
         # lambda is how much we punish large weights

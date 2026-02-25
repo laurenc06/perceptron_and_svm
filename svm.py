@@ -54,7 +54,7 @@ def preprocess_data(X_train, X_test):
 class SVMClassifier:
     """Support Vector Machine Classifier."""
     # initialize stuff
-    def __init__(self, epochs=1, learning_rate = 0.001, lambda_ = 0.005):
+    def __init__(self, epochs=1, learning_rate = 0.001, lambda_ = 0.007):
         self.epochs = epochs
         # note: learning rate is how big of a step we take when updating weights
         # lambda is how much we punish large weights
@@ -122,7 +122,7 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
     X_train_p, X_test_p = preprocess_data(X_train, X_test)
 
     # Train
-    model = SVMClassifier(epochs=2)  #tune epochs
+    model = SVMClassifier(epochs=3)  #tune epochs
     model.train(X_train_p, y_train)
 
     # Predict
@@ -130,6 +130,7 @@ def run(Xtrain_file: str, Ytrain_file: str, test_data_file: str, pred_file: str)
 
     # Save one integer per line, no header according to assignment instructions
     np.savetxt(pred_file, y_pred, fmt="%d")
+
 
 
 # # this block is for testing and for generating my plots
